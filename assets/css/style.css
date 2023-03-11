@@ -1,0 +1,104 @@
+.hide {
+    display: none;
+}
+.hide {
+  display: none;
+}
+
+body {
+  font-family: Arial, sans-serif;
+}
+
+h1 {
+  font-size: 32px;
+  font-weight: bold;
+  margin: 0;
+}
+
+h2 {
+  font-size: 24px;
+  font-weight: bold;
+  margin: 0;
+}
+
+h3 {
+  font-size: 20px;
+  font-weight: bold;
+  margin: 0;
+}
+
+p {
+  font-size: 16px;
+  margin: 0;
+}
+
+#start-screen {
+  text-align: center;
+  padding-top: 100px;
+}
+
+#start-screen button {
+  font-size: 20px;
+  padding: 10px 20px;
+  border: none;
+  background-color: #007bff;
+  color: #fff;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+#quiz-container {
+  text-align: center;
+  padding-top: 50px;
+}
+
+#answer-buttons button {
+  display: block;
+  margin: 10px auto;
+  font-size: 16px;
+  padding: 10px 20px;
+  border: none;
+  background-color: #007bff;
+  color: #fff;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+#answer-buttons .correct {
+  background-color: #28a745;
+}
+
+#answer-buttons .incorrect {
+  background-color: #dc3545;
+}
+
+#game-over-screen {
+  text-align: center;
+  padding-top: 50px;
+}
+
+#game-over-screen form {
+  margin-top: 20px;
+}
+
+#game-over-screen label {
+  font-size: 16px;
+}
+
+#game-over-screen input[type="text"] {
+  font-size: 16px;
+  padding: 5px;
+  margin-left: 5px;
+}
+
+#game-over-screen button[type="submit"] {
+  font-size: 16px;
+  padding: 5px 10px;
+  border: none;
+  background-color: #007bff;
+  color: #fff;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-left: 10px;
+}
+ 
