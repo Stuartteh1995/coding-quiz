@@ -1,17 +1,19 @@
+
 var startButton = document.getElementById("start-btn");
 var questionContainer = document.getElementById("quiz-container");
 var questionEl = document.getElementById("question");
 var answerButtonsEl = document.getElementById("answer-buttons");
 var timerEl = document.getElementById("timer");
-var highScoreEl = document.getElementById("high-score");
 var initialsEl = document.getElementById("game-over-screen");
-var submitButton = document.getElementById("submit-score");
+var initials = document.getElementById("initials")
+var submitButton = document.getElementById("submit-score-btn");
 var finalScoreEl = document.getElementById("final-score");
 var startScreenEl = document.getElementById("start-screen");
 
+
 var shuffledQuestions, currentQuestionIndex;
 var score = 0;
-var time = 5;
+var time = 75;
 var timerInterval;
 
 var startButton = document.getElementById("start-btn");
@@ -30,6 +32,7 @@ function startQuiz(){
     shuffledQuestions = questions.sort(() => Math.random() - 0.5);
     currentQuestionIndex = 0;
     startScreenEl.classList.add("hide");
+    questionContainer.classList.remove("hide");
     setNextQuestion();
     startTimer();
 }
@@ -81,7 +84,11 @@ if (isCorrect) {
     
 currentQuestionIndex++;
       if (currentQuestionIndex < shuffledQuestions.length) {
-        setNextQuestion();
+        setTimeout(()=> {
+          setNextQuestion();
+       }
+       ,500);
+        
       } else {
         endQuiz();
       }
@@ -113,19 +120,22 @@ function startTimer() {
       }
 
 function endQuiz() {
+      
         clearInterval(timerInterval);
         finalScoreEl.textContent = score;
         questionContainer.classList.add("hide");
         initialsEl.classList.remove("hide");
       }
 
+submitButton.addEventListener("click", saveScore);
+
+
 function saveScore() {
-        var highScores = JSON.parse(localStorage.getItem("highScores")) || [];
-        var initials = initialsEl.value.trim();
-        var newScore = { score, initials };
-        highScores.push(newScore);
-        localStorage.setItem("highScores", JSON.stringify(highScores));
-        window.location.href = "highscores.html";
+  console.log("test")
+        var highScores = JSON.parse(localStorage.getItem("finalScoreEl"));
+          initials = initials.value;
+        var newScore = initials + ": " + score
+       localStorage.setItem("highScores", JSON.stringify(newScore));
       }
       
 
@@ -158,12 +168,12 @@ var questions = [
             ]
           },
           {
-            question: "?",
+            question: "how to create a button on html?",
             answers: [
-              { text: "number", correct: false },
-              { text: "String", correct: false },
-              { text: "boolean", correct: false },
-              { text: "special charactors", correct: true }
+              { text: "btn", correct: false },
+              { text: "div" , correct: false },
+              { text: "image", correct: false },
+              { text: "button", correct: true }
             ]
           },
           {
