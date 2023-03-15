@@ -1,4 +1,4 @@
-
+// creating variables 
 var startButton = document.getElementById("start-btn");
 var questionContainer = document.getElementById("quiz-container");
 var questionEl = document.getElementById("question");
@@ -9,41 +9,37 @@ var initials = document.getElementById("initials")
 var submitButton = document.getElementById("submit-score-btn");
 var finalScoreEl = document.getElementById("final-score");
 var startScreenEl = document.getElementById("start-screen");
-
-
 var shuffledQuestions, currentQuestionIndex;
 var score = 0;
 var time = 75;
 var timerInterval;
-
 var startButton = document.getElementById("start-btn");
+
+// when button is clicked start quiz
 startButton.addEventListener("click", startQuiz);
 
-document.addEventListener("DOMContentLoaded", function() {
-    var startButton = document.getElementById("start-btn");
-    if (startButton) {
-      startButton.addEventListener("click", startQuiz);
-    }
-
-  });
   
 // start button 
 function startQuiz(){
+  // shuffles question when quiz starts
     shuffledQuestions = questions.sort(() => Math.random() - 0.5);
     currentQuestionIndex = 0;
     startScreenEl.classList.add("hide");
     questionContainer.classList.remove("hide");
+    // start timer and next questions
     setNextQuestion();
     startTimer();
 }
 
 function setNextQuestion(){
+  // resets the state to clear any previous right or wrong answers that has changed
     resetState();
-    // display question and answer 
+    // display a shuffled question and answer 
     showQuestion(shuffledQuestions[currentQuestionIndex]);
 }
 
 function showQuestion(question) {
+  // displays and question and answers
     questionEl.innerHTML = question.question;
     question.answers.forEach((answer) => {
       var button = document.createElement("button");
@@ -57,33 +53,41 @@ function showQuestion(question) {
     });
   }
 
+  // resets the buttons
   function resetState() {
     while (answerButtonsEl.firstChild) {
       answerButtonsEl.removeChild(answerButtonsEl.firstChild);
     }
   }
 
+  // targets the user input to see what the user selects
   function selectAnswer(e) {
     var selectedButton = e.target;
     var isCorrect = selectedButton.dataset.correct;
 
+    // if the user is correct git the button a correct class
 setStatusClass(document.body, isCorrect);
     Array.from(answerButtonsEl.children).forEach((button) => {
       setStatusClass(button, button.dataset.correct);
     });
 
+    // if user answers correctly user gets 10 points but if the user answer wrongly timer is reduce by 15 sec
+    // and if the timer runs out end game 
 if (isCorrect) {
         score += 10;
       } else {
         time -= 15;
         if (time < 0) {
           time = 0;
+          endQuiz();
         }
         timerEl.textContent = time;
       }
-    
+
+      // this shuffles the question and ends if the all question is displayed
 currentQuestionIndex++;
       if (currentQuestionIndex < shuffledQuestions.length) {
+        // this delays the next question after the user answers
         setTimeout(()=> {
           setNextQuestion();
        }
@@ -94,6 +98,8 @@ currentQuestionIndex++;
       }
     }
 
+    // if user answer correct add a correct class, if user answers wrongly add a wrong class
+    // this would flag green if correct and red if wrong.
 function setStatusClass(element, isCorrect) {
         clearStatusClass(element);
         if (isCorrect) {
@@ -103,11 +109,12 @@ function setStatusClass(element, isCorrect) {
         }
       }
 
+      // resets button color
 function clearStatusClass(element) {
         element.classList.remove("correct");
         element.classList.remove("incorrect");
       }
-
+      // this sets the timer to count down 
 function startTimer() {
         timerInterval = setInterval(() => {
           time--;
@@ -119,6 +126,7 @@ function startTimer() {
         }, 1000);
       }
 
+      // when quiz ends display score, stops timer, display a bar to add initials
 function endQuiz() {
       
         clearInterval(timerInterval);
@@ -126,19 +134,18 @@ function endQuiz() {
         questionContainer.classList.add("hide");
         initialsEl.classList.remove("hide");
       }
-
+// score is saved when button is click
 submitButton.addEventListener("click", saveScore);
 
-
+// stores the score and initials into the local storage
 function saveScore() {
-  console.log("test")
         var highScores = JSON.parse(localStorage.getItem("finalScoreEl"));
           initials = initials.value;
         var newScore = initials + ": " + score
        localStorage.setItem("highScores", JSON.stringify(newScore));
       }
       
-
+// question and answers
 var questions = [
         {
           question: "What are not JavaScript Data Types",

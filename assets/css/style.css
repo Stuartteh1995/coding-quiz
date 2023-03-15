@@ -91,7 +91,7 @@ p {
   margin-left: 5px;
 }
 
-#game-over-screen button[type="submit"] {
+#game-over-screen button {
   font-size: 16px;
   padding: 5px 10px;
   border: none;
